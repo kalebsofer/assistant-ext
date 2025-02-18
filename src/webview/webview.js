@@ -116,9 +116,6 @@
         // Add initial message
         addMessage('ai', 'Assistant is ready. How can I help you?');
 
-        // Send initial test message
-        vscode.postMessage({ command: 'test', text: 'Basic test' });
-
     } catch (error) {
         console.error('Failed to initialize webview:', error);
     }

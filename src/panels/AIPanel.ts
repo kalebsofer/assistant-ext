@@ -72,25 +72,15 @@ export class AIPanel {
         const panel = vscode.window.createWebviewPanel(
             'aiAssistantPanel',
             'AI Assistant',
-            vscode.ViewColumn.Two, // This will place the panel on the right
+            vscode.ViewColumn.Two,
             {
                 enableScripts: true,
-                retainContextWhenHidden: true,
             }
         );
 
         AIPanel._outputChannel.appendLine('Initializing new AIPanel instance...');
         AIPanel.currentPanel = new AIPanel(panel, extensionUri);
         
-        // Add error handler for the webview
-        panel.webview.onDidReceiveMessage(
-            message => {
-                AIPanel._outputChannel.appendLine(`Debug: Webview message received in createOrShow: ${JSON.stringify(message)}`);
-            },
-            undefined,
-            AIPanel.currentPanel._disposables
-        );
-
         AIPanel._outputChannel.appendLine('New AI panel created and initialized');
         return AIPanel.currentPanel;
     }
@@ -106,6 +96,7 @@ export class AIPanel {
 
     private async _handleQuestion(question: string) {
         try {
+            
             AIPanel._outputChannel.appendLine('Sending request to Ollama...');
             const startTime = Date.now();
             
