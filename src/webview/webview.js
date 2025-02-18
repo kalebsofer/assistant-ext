@@ -1,13 +1,10 @@
 (function() {
-    console.log('Webview script starting...');
     try {
         if (typeof acquireVsCodeApi === 'undefined') {
-            console.error('acquireVsCodeApi is not defined');
             throw new Error('acquireVsCodeApi is not defined');
         }
 
         const vscode = acquireVsCodeApi();
-        console.log('VS Code API acquired');
         
         // Get DOM elements
         const chatContainer = document.getElementById('chat-container');
@@ -17,20 +14,11 @@
         const attachedFiles = new Set();
 
         if (!chatContainer || !questionInput || !addContextBtn || !sendBtn) {
-            console.error('Failed to find required DOM elements:', {
-                chatContainer: !!chatContainer,
-                questionInput: !!questionInput,
-                addContextBtn: !!addContextBtn,
-                sendBtn: !!sendBtn
-            });
             throw new Error('Required DOM elements not found');
         }
 
-        console.log('DOM elements initialized');
-        
         // Add messages to the chat
         function addMessage(type, content) {
-            console.log('Adding message:', type, content);
             const messageDiv = document.createElement('div');
             messageDiv.className = 'message ' + type + '-message';
             messageDiv.textContent = content;
@@ -41,7 +29,6 @@
         // Send a message
         function sendMessage() {
             const question = questionInput.value.trim();
-            console.log('Attempting to send message:', question);
             if (question) {
                 addMessage('user', question);
                 vscode.postMessage({ 
@@ -99,19 +86,16 @@
 
         // Add click handlers
         sendBtn.addEventListener('click', () => {
-            console.log('Send button clicked');
             sendMessage();
         });
 
         addContextBtn.addEventListener('click', () => {
-            console.log('Add context button clicked');
             vscode.postMessage({ command: 'pickFiles' });
         });
 
         // Add enter key handler
         questionInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
-                console.log('Enter key pressed');
                 e.preventDefault();
                 sendMessage();
             }
@@ -120,7 +104,6 @@
         // Handle messages from the extension
         window.addEventListener('message', event => {
             const message = event.data;
-            console.log('Received message from extension:', message);
             
             if (message.type === 'response') {
                 addMessage('ai', message.content);
@@ -133,11 +116,9 @@
         // Add initial message
         addMessage('ai', 'Assistant is ready. How can I help you?');
 
-        // Simple test message
+        // Send initial test message
         vscode.postMessage({ command: 'test', text: 'Basic test' });
-        console.log('Initial setup complete');
 
-        console.log('Webview script initialization complete');
     } catch (error) {
         console.error('Failed to initialize webview:', error);
     }

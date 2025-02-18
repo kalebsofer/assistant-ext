@@ -23,33 +23,25 @@ export class AIPanel {
         AIPanel._outputChannel.appendLine('Initializing AI Assistant panel...');
         
         if (!this._panel.webview) {
-            AIPanel._outputChannel.appendLine('ERROR: Webview is not available!');
             throw new Error('Webview is not available');
         }
         
-        AIPanel._outputChannel.appendLine('Setting webview options...');
         this._panel.webview.options = {
             enableScripts: true,
             localResourceRoots: [extensionUri]
         };
         
-        AIPanel._outputChannel.appendLine('Setting webview HTML...');
         this._panel.webview.html = this._getWebviewContent();
-        
-        // Add back the dispose handler
         this._panel.onDidDispose(() => this.dispose(), null, this._disposables);
         
-        AIPanel._outputChannel.appendLine('Setting up message handlers...');
         this._panel.webview.onDidReceiveMessage(
             async message => {
-                AIPanel._outputChannel.appendLine(`Received message from webview: ${JSON.stringify(message)}`);
                 switch (message.command) {
                     case 'askQuestion':
                         AIPanel._outputChannel.appendLine(`Processing question: ${message.text}`);
                         await this._handleQuestion(message.text);
                         break;
                     case 'pickFiles':
-                        AIPanel._outputChannel.appendLine('Processing pickFiles command');
                         await this._pickFiles();
                         break;
                     case 'removeFile':
@@ -65,26 +57,6 @@ export class AIPanel {
             null,
             this._disposables
         );
-
-        // Add error handler for the webview
-        this._panel.webview.onDidReceiveMessage(
-            message => {
-                AIPanel._outputChannel.appendLine(`Debug: Raw webview message: ${JSON.stringify(message)}`);
-            },
-            undefined,
-            this._disposables
-        );
-        
-        AIPanel._outputChannel.appendLine('AI Assistant panel initialized');
-
-        // Test message passing
-        setTimeout(() => {
-            AIPanel._outputChannel.appendLine('Sending test message to webview...');
-            this._panel.webview.postMessage({ 
-                type: 'test', 
-                content: 'Extension initialized' 
-            });
-        }, 1000);
     }
 
     public static async createOrShow(extensionUri: vscode.Uri): Promise<AIPanel> {
@@ -160,9 +132,7 @@ export class AIPanel {
 
             const data = await response.json() as OllamaResponse;
             const duration = Date.now() - startTime;
-            AIPanel._outputChannel.appendLine(`Received response from Ollama (${duration}ms)`);
-            
-            AIPanel._outputChannel.appendLine(`Response content: ${JSON.stringify(data)}`);
+            AIPanel._outputChannel.appendLine(`Request completed in ${duration}ms`);
             
             this._panel.webview.postMessage({ 
                 type: 'response', 
@@ -198,32 +168,25 @@ export class AIPanel {
     }
 
     private _getWebviewContent() {
-        AIPanel._outputChannel.appendLine('Generating webview content...');
-        
         try {
-            // Get path to webview html file
             const htmlPath = path.join(this._extensionPath, 'out', 'webview', 'webview.html');
-            AIPanel._outputChannel.appendLine(`Loading HTML from: ${htmlPath}`);
             
             if (!fs.existsSync(htmlPath)) {
                 throw new Error(`HTML file not found at: ${htmlPath}`);
             }
             
             let html = fs.readFileSync(htmlPath, 'utf8');
-            AIPanel._outputChannel.appendLine('HTML file loaded successfully');
 
             // Get the webview js file
             const jsPath = vscode.Uri.file(
                 path.join(this._extensionPath, 'out', 'webview', 'webview.js')
             );
             const jsUri = this._panel.webview.asWebviewUri(jsPath);
-            AIPanel._outputChannel.appendLine(`JS URI: ${jsUri}`);
 
             // Replace the script src with the correct URI
             const scriptSrc = `<script src="${jsUri}"></script>`;
             html = html.replace('<script src="webview.js"></script>', scriptSrc);
             
-            AIPanel._outputChannel.appendLine('Webview content prepared');
             return html;
         } catch (error) {
             AIPanel._outputChannel.appendLine(`Error loading webview content: ${error}`);
