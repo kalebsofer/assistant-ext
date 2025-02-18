@@ -42,9 +42,10 @@
     }
   },
   "scripts": {
+    "copy-webview": "node scripts/copy-webview.js",
     "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
+    "compile": "tsc -p ./ && npm run copy-webview",
+    "watch": "tsc -watch -p ./ & npm run copy-webview",
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src",
     "test": "vscode-test"
@@ -62,5 +63,8 @@
   },
   "dependencies": {
     "node-fetch": "^3.3.0"
-  }
+  },
+  "files": [
+    "out/**/*"
+  ]
 }

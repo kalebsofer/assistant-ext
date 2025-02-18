@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; 
+        style-src 'unsafe-inline'; 
+        script-src 'unsafe-inline' vscode-resource: https://*.vscode-cdn.net;
+        connect-src http://localhost:* vscode-webview:;
+        img-src vscode-resource: https:">
+    <style>
+        body { 
+            padding: 10px; 
+            color: var(--vscode-editor-foreground);
+            font-family: var(--vscode-font-family);
+        }
+
+        #chat-container { 
+            height: 70vh; 
+            overflow-y: auto; 
+            margin-bottom: 60px;
+        }
+
+        .message { 
+            margin: 10px 0; 
+            padding: 10px; 
+            border-radius: 5px; 
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .user-message { 
+            background: var(--vscode-input-background);
+            border: 1px solid var(--vscode-input-border);
+        }
+
+        .ai-message { 
+            background: var(--vscode-editor-background);
+            border: 1px solid var(--vscode-editor-lineHighlightBorder);
+        }
+
+        #input-container { 
+            position: fixed; 
+            bottom: 20px; 
+            left: 20px; 
+            right: 20px;
+            background: var(--vscode-editor-background);
+            padding: 10px 0;
+            display: flex;
+            gap: 8px;
+        }
+
+        #question-input { 
+            flex-grow: 1;
+            padding: 8px;
+            background: var(--vscode-input-background);
+            color: var(--vscode-input-foreground);
+            border: 1px solid var(--vscode-input-border);
+            border-radius: 4px;
+        }
+
+        #attached-files {
+            margin: 10px 0;
+            padding: 8px;
+            border-radius: 4px;
+            background: var(--vscode-editor-background);
+            border: 1px solid var(--vscode-input-border);
+            display: none;
+        }
+
+        #attached-files.has-files {
+            display: block;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            padding: 4px 8px;
+            margin: 4px 0;
+            background: var(--vscode-input-background);
+            border-radius: 3px;
+        }
+
+        .file-icon {
+            margin-right: 8px;
+            color: var(--vscode-symbolIcon-fileForeground);
+        }
+
+        .file-name {
+            flex-grow: 1;
+            font-size: 12px;
+            color: var(--vscode-foreground);
+        }
+
+        .remove-file {
+            padding: 2px 6px;
+            background: none;
+            border: none;
+            color: var(--vscode-icon-foreground);
+            cursor: pointer;
+            opacity: 0.7;
+        }
+
+        .remove-file:hover {
+            opacity: 1;
+        }
+
+        .files-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 4px 8px;
+            border-bottom: 1px solid var(--vscode-input-border);
+            margin-bottom: 8px;
+        }
+
+        .files-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--vscode-foreground);
+            opacity: 0.8;
+        }
+
+        .clear-files {
+            font-size: 11px;
+            color: var(--vscode-button-foreground);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 2px 6px;
+            opacity: 0.8;
+        }
+
+        .clear-files:hover {
+            opacity: 1;
+        }
+
+        #add-context-btn, #send-btn {
+            padding: 8px 12px;
+            background: var(--vscode-button-background);
+            color: var(--vscode-button-foreground);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        #add-context-btn:hover, #send-btn:hover {
+            background: var(--vscode-button-hoverBackground);
+        }
+    </style>
+</head>
+<body>
+    <div id="attached-files">
+        <div class="files-header">
+            <span class="files-title">Attached Files</span>
+            <button class="clear-files" onclick="clearAllFiles()">Clear All</button>
+        </div>
+        <div id="files-list"></div>
+    </div>
+    <div id="chat-container"></div>
+    <div id="input-container">
+        <button id="add-context-btn">
+            <svg width="16" height="16" viewBox="0 0 16 16">
+                <path fill="currentColor" d="M14 7v1H8v6H7V8H1V7h6V1h1v6h6z"/>
+            </svg>
+            Add context
+        </button>
+        <input type="text" id="question-input" placeholder="Ask a question...">
+        <button id="send-btn">
+            <svg width="16" height="16" viewBox="0 0 16 16">
+                <path fill="currentColor" d="M1 9l14-4.5L1 0v3.5L11 4.5 1 5.5z"/>
+            </svg>
+        </button>
+    </div>
+    <script src="webview.js"></script>
+</body>
+</html> 

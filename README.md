@@ -1,6 +1,6 @@
-# kscodes README
+# kscodes
 
-This is the README for your extension "kscodes". After writing up a brief description, we recommend including the following sections.
+An AI assistant, as a VS Code extension.
 
 ## Features
 
