@@ -84,6 +84,23 @@
             vscode.postMessage({ command: 'clearFiles' });
         }
 
+        // Add removeFile function
+        function removeFile(file) {
+            attachedFiles.delete(file);
+            updateAttachedFiles();
+            vscode.postMessage({ 
+                command: 'removeFile', 
+                fileName: file 
+            });
+        }
+
+        // Make clearAllFiles function available in global scope for onclick
+        window.clearAllFiles = function() {
+            attachedFiles.clear();
+            updateAttachedFiles();
+            vscode.postMessage({ command: 'clearFiles' });
+        };
+
         // Add click handlers
         sendBtn.addEventListener('click', () => {
             sendMessage();

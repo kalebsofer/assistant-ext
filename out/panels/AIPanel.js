@@ -79,7 +79,7 @@ class AIPanel {
     }
     static async createOrShow(extensionUri) {
         AIPanel._outputChannel.appendLine('Creating or showing AI panel...');
-        const panel = vscode.window.createWebviewPanel('aiAssistantPanel', 'AI Assistant', vscode.ViewColumn.Two, {
+        const panel = vscode.window.createWebviewPanel('aiAssistantPanel', 'AI Assistant', vscode.ViewColumn.Beside, {
             enableScripts: true,
         });
         AIPanel._outputChannel.appendLine('Initializing new AIPanel instance...');

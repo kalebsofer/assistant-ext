@@ -65,7 +65,7 @@ export class AIPanel {
         const panel = vscode.window.createWebviewPanel(
             'aiAssistantPanel',
             'AI Assistant',
-            vscode.ViewColumn.Two,
+            vscode.ViewColumn.Beside,
             {
                 enableScripts: true,
             }

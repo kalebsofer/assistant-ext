@@ -21,28 +21,7 @@
         "command": "kscodes.askQuestion",
         "title": "Ask AI Assistant"
       }
-    ],
-    "viewsContainers": {
-      "activitybar": [],
-      "panel": [],
-      "remote": [],
-      "secondaryBar": [
-        {
-          "id": "ai-assistant",
-          "title": "AI Assistant",
-          "icon": "media/ai-icon.svg"
-        }
-      ]
-    },
-    "views": {
-      "ai-assistant": [
-        {
-          "type": "webview",
-          "id": "aiAssistantPanel",
-          "name": "AI Assistant"
-        }
-      ]
-    }
+    ]
   },
   "scripts": {
     "copy-webview": "node scripts/copy-webview.js",
