@@ -27,6 +27,8 @@
             border-radius: 5px; 
             white-space: pre-wrap;
             word-wrap: break-word;
+            max-width: 100%;
+            overflow-x: auto;
         }
 
         .user-message { 
@@ -41,18 +43,18 @@
 
         #input-container { 
             position: fixed; 
-            bottom: 20px; 
-            left: 20px; 
-            right: 20px;
+            bottom: 0;
+            left: 0;
+            right: 0;
             background: var(--vscode-editor-background);
-            padding: 10px 0;
+            padding: 8px;
             display: flex;
-            gap: 8px;
+            gap: 4px;
         }
 
         #question-input { 
             flex-grow: 1;
-            padding: 8px;
+            padding: 4px 8px;
             background: var(--vscode-input-background);
             color: var(--vscode-input-foreground);
             border: 1px solid var(--vscode-input-border);
@@ -136,7 +138,7 @@
         }
 
         #add-context-btn, #send-btn {
-            padding: 8px 12px;
+            padding: 4px 8px;
             background: var(--vscode-button-background);
             color: var(--vscode-button-foreground);
             border: none;

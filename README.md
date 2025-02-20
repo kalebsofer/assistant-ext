@@ -12,7 +12,12 @@ A VS Code extension that provides an AI-powered coding assistant using Ollama's 
   - View attached files in the UI
   - Remove individual files or clear all context
 
-![AI Assistant Interface](images/assistant-interface.png)
+## TODO
+
+- [ ] UX guidelines
+- [ ] Integration tests
+- [ ] Publish
+- [ ] CI
 
 ## Requirements
 

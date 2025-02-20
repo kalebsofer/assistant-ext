@@ -79,12 +79,6 @@ class AIPanel {
     }
     static async createOrShow(extensionUri) {
         AIPanel._outputChannel.appendLine('Creating or showing AI panel...');
-        // First, move the current active editor to the left side if it exists
-        if (vscode.window.activeTextEditor) {
-            // Move the active editor to the left side
-            await vscode.commands.executeCommand('workbench.action.moveEditorToLeftGroup');
-        }
-        // Create the webview panel on the right side
         const panel = vscode.window.createWebviewPanel('aiAssistantPanel', 'AI Assistant', vscode.ViewColumn.Two, {
             enableScripts: true,
         });

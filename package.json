@@ -23,7 +23,10 @@
       }
     ],
     "viewsContainers": {
-      "activitybar": [
+      "activitybar": [],
+      "panel": [],
+      "remote": [],
+      "secondaryBar": [
         {
           "id": "ai-assistant",
           "title": "AI Assistant",
