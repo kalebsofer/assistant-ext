@@ -7,7 +7,7 @@ export interface MockOllamaConfig {
 }
 
 export class MockOllamaServer {
-    private server!: http.Server;  // Use definite assignment assertion
+    private server!: http.Server;
     private config: MockOllamaConfig;
 
     constructor(config: MockOllamaConfig) {
@@ -17,7 +17,6 @@ export class MockOllamaServer {
     public async start(): Promise<void> {
         return new Promise((resolve) => {
             this.server = http.createServer((req, res) => {
-                // Basic mock implementation
                 if (req.url === '/api/generate' && req.method === 'POST') {
                     setTimeout(() => {
                         res.writeHead(200, { 'Content-Type': 'application/json' });
