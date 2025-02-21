@@ -55,8 +55,8 @@ A VS Code extension that provides an AI-powered coding assistant using Ollama's 
 
 This extension contributes the following settings:
 
-* `kscodes.modelName`: The Ollama model to use (default: 'deepseek-r1:1.5b')
-* `kscodes.ollamaUrl`: URL of the Ollama server (default: 'http://localhost:11434')
+* `soft-assist.modelName`: The Ollama model to use (default: 'deepseek-r1:1.5b')
+* `soft-assist.ollamaUrl`: URL of the Ollama server (default: 'http://localhost:11434')
 
 ## Known Issues
 

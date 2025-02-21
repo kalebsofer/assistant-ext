@@ -39,10 +39,10 @@ const vscode = __importStar(require("vscode"));
 const AIPanel_1 = require("./panels/AIPanel");
 function activate(context) {
     console.log('AI Assistant extension is now active!');
-    let openAIPanelCommand = vscode.commands.registerCommand('kscodes.openAIPanel', () => {
+    let openAIPanelCommand = vscode.commands.registerCommand('soft-assist.openAIPanel', () => {
         AIPanel_1.AIPanel.createOrShow(context.extensionUri);
     });
-    let askQuestionCommand = vscode.commands.registerCommand('kscodes.askQuestion', async () => {
+    let askQuestionCommand = vscode.commands.registerCommand('soft-assist.askQuestion', async () => {
         const question = await vscode.window.showInputBox({
             prompt: 'What would you like to ask?',
             placeHolder: 'Enter your question...'

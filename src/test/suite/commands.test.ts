@@ -10,7 +10,7 @@ suite('Command Test Suite', () => {
     suiteSetup(async () => {
         TestHelper.before();
         // Activate the extension before running tests
-        await vscode.extensions.getExtension('kscodes')?.activate();
+        await vscode.extensions.getExtension('soft-assist')?.activate();
     });
 
     setup(() => {
@@ -29,12 +29,12 @@ suite('Command Test Suite', () => {
 
     test('Command Registration', async () => {
         const commands = await vscode.commands.getCommands();
-        assert.ok(commands.includes('kscodes.openAIPanel'), 'openAIPanel command should be registered');
-        assert.ok(commands.includes('kscodes.askQuestion'), 'askQuestion command should be registered');
+        assert.ok(commands.includes('soft-assist.openAIPanel'), 'openAIPanel command should be registered');
+        assert.ok(commands.includes('soft-assist.askQuestion'), 'askQuestion command should be registered');
     });
 
     test('Open AI Panel Command', async () => {
-        await vscode.commands.executeCommand('kscodes.openAIPanel');
+        await vscode.commands.executeCommand('soft-assist.openAIPanel');
         await TestHelper.waitForCondition(() => AIPanel.currentPanel !== undefined);
         assert.ok(AIPanel.currentPanel, 'Panel should be created');
     });
@@ -43,7 +43,7 @@ suite('Command Test Suite', () => {
         const testQuestion = 'Test question';
         inputBoxStub.resolves(testQuestion);
 
-        await vscode.commands.executeCommand('kscodes.askQuestion');
+        await vscode.commands.executeCommand('soft-assist.askQuestion');
         await TestHelper.waitForCondition(() => AIPanel.currentPanel !== undefined);
         
         assert.ok(inputBoxStub.calledOnce);
@@ -54,7 +54,7 @@ suite('Command Test Suite', () => {
         // Simulate user cancelling the input box by returning undefined
         inputBoxStub.resolves(undefined);
 
-        await vscode.commands.executeCommand('kscodes.askQuestion');
+        await vscode.commands.executeCommand('soft-assist.askQuestion');
         
         // Wait to ensure no panel is created
         await new Promise(resolve => setTimeout(resolve, 100));
