@@ -38,7 +38,22 @@ temp/
 
 # Optional: Uncomment if using Next.js
 # .next/
-# out/
+out/
 
 # Optional: Uncomment if using Vercel
-# .vercel 
+# .vercel
+
+# Add these new entries
+.vscode-test/
+*.vsix
+
+# Ignore compiled test files
+out/test/
+
+# Ignore test results
+test-results/
+
+# New changes from the code block
+.vscode-test/*
+**/vscode-test/*
+**/vscode-test/**/* 
