@@ -187,5 +187,8 @@ class AIPanel {
     sendMessage(message) {
         this._panel.webview.postMessage(message);
     }
+    isVisible() {
+        return this._panel.visible;
+    }
 }
 exports.AIPanel = AIPanel;

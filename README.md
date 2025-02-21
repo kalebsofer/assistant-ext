@@ -14,7 +14,7 @@ A VS Code extension that provides an AI-powered coding assistant using Ollama's 
 
 ## TODO
 
-- [ ] UX guidelines
+- [X] UX guidelines
 - [ ] Integration tests
 - [ ] Publish
 - [ ] CI

@@ -194,4 +194,8 @@ export class AIPanel {
     public sendMessage(message: any) {
         this._panel.webview.postMessage(message);
     }
+
+    public isVisible(): boolean {
+        return this._panel.visible;
+    }
 } 

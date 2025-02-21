@@ -1,0 +1,17 @@
+// Sample TypeScript code for testing
+function greet(name: string): string {
+    return `Hello, ${name}!`;
+}
+
+class Calculator {
+    add(a: number, b: number): number {
+        return a + b;
+    }
+    
+    multiply(a: number, b: number): number {
+        return a * b;
+    }
+}
+
+// Export for testing
+export { greet, Calculator };
