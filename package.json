@@ -10,9 +10,9 @@
     "Other"
   ],
   "activationEvents": [
-    "onStartupFinished",
     "onCommand:soft-assist.openAIPanel",
-    "onCommand:soft-assist.askQuestion"
+    "onCommand:soft-assist.askQuestion",
+    "onView:ai-assistant-view"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -33,6 +33,15 @@
           "id": "ai-assistant",
           "title": "AI Assistant",
           "icon": "$(lightbulb)"
+        }
+      ]
+    },
+    "views": {
+      "ai-assistant": [
+        {
+          "id": "ai-assistant-view",
+          "name": "AI Assistant",
+          "type": "webview"
         }
       ]
     }

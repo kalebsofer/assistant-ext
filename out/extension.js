@@ -36,9 +36,29 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.activate = activate;
 exports.deactivate = deactivate;
 const vscode = __importStar(require("vscode"));
+const path = __importStar(require("path"));
+const fs = __importStar(require("fs"));
 const AIPanel_1 = require("./panels/AIPanel");
+function getStatusViewContent(extensionPath) {
+    const htmlPath = path.join(extensionPath, 'out', 'webview', 'statusView.html');
+    return fs.readFileSync(htmlPath, 'utf8');
+}
 function activate(context) {
     console.log('AI Assistant extension is now active!');
+    const provider = vscode.window.registerWebviewViewProvider('ai-assistant-view', {
+        resolveWebviewView: (webviewView) => {
+            webviewView.webview.options = {
+                enableScripts: true
+            };
+            webviewView.webview.html = getStatusViewContent(context.extensionUri.fsPath);
+            webviewView.onDidChangeVisibility(() => {
+                if (webviewView.visible && (!AIPanel_1.AIPanel.currentPanel || !AIPanel_1.AIPanel.currentPanel.isVisible())) {
+                    AIPanel_1.AIPanel.createOrShow(context.extensionUri);
+                    vscode.commands.executeCommand('workbench.action.focusSecondSideBar');
+                }
+            });
+        }
+    });
     let openAIPanelCommand = vscode.commands.registerCommand('soft-assist.openAIPanel', () => {
         AIPanel_1.AIPanel.createOrShow(context.extensionUri);
     });
@@ -55,6 +75,9 @@ function activate(context) {
             });
         }
     });
-    context.subscriptions.push(openAIPanelCommand, askQuestionCommand);
+    // When the extension activates, open the AI Panel in the secondary sidebar
+    AIPanel_1.AIPanel.createOrShow(context.extensionUri);
+    vscode.commands.executeCommand('workbench.action.focusSecondSideBar');
+    context.subscriptions.push(provider, openAIPanelCommand, askQuestionCommand);
 }
 function deactivate() { }
