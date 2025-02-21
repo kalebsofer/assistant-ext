@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'none'; 
-        style-src 'unsafe-inline'; 
+        style-src 'unsafe-inline' https://cdn.jsdelivr.net; 
         script-src 'unsafe-inline' vscode-resource: https://*.vscode-cdn.net;
         connect-src http://localhost:* vscode-webview:;
-        img-src vscode-resource: https:">
+        img-src vscode-resource: https:;
+        font-src https://cdn.jsdelivr.net;">
+    <link href="https://cdn.jsdelivr.net/npm/@vscode/codicons/dist/codicon.css" rel="stylesheet" />
     <style>
         body { 
             padding: 10px; 
@@ -153,6 +155,11 @@
         #add-context-btn:hover, #send-btn:hover {
             background: var(--vscode-button-hoverBackground);
         }
+
+        /* Add styles for codicon */
+        .codicon {
+            margin-right: 4px;
+        }
     </style>
 </head>
 <body>
@@ -166,9 +173,7 @@
     <div id="chat-container"></div>
     <div id="input-container">
         <button id="add-context-btn">
-            <svg width="16" height="16" viewBox="0 0 16 16">
-                <path fill="currentColor" d="M14 7v1H8v6H7V8H1V7h6V1h1v6h6z"/>
-            </svg>
+            <span class="codicon codicon-add"></span>
             Add context
         </button>
         <input type="text" id="question-input" placeholder="Ask a question...">

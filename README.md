@@ -1,4 +1,4 @@
-# KSCode AI Assistant
+# IDE Assistant with Ollama
 
 A VS Code extension that provides an AI-powered coding assistant using Ollama's DeepSeek model. This extension integrates directly into your VS Code environment, offering contextual code assistance, explanations, and suggestions.
 
@@ -15,7 +15,7 @@ A VS Code extension that provides an AI-powered coding assistant using Ollama's 
 ## TODO
 
 - [X] UX guidelines
-- [ ] Integration tests
+- [X] Integration tests
 - [ ] Publish
 - [ ] CI
 

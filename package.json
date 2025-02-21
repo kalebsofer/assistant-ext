@@ -11,21 +11,31 @@
   ],
   "activationEvents": [
     "onStartupFinished",
-    "onCommand:kscodes.openAIPanel",
-    "onCommand:kscodes.askQuestion"
+    "onCommand:soft-assist.openAIPanel",
+    "onCommand:soft-assist.askQuestion"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "kscodes.openAIPanel",
-        "title": "Open AI Assistant Panel"
+        "command": "soft-assist.openAIPanel",
+        "title": "Open AI Assistant Panel",
+        "icon": "$(lightbulb)"
       },
       {
-        "command": "kscodes.askQuestion",
+        "command": "soft-assist.askQuestion",
         "title": "Ask AI Assistant"
       }
-    ]
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "ai-assistant",
+          "title": "AI Assistant",
+          "icon": "$(lightbulb)"
+        }
+      ]
+    }
   },
   "scripts": {
     "copy-webview": "node scripts/copy-webview.js",
