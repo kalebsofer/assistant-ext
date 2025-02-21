@@ -9,8 +9,22 @@ suite('Command Test Suite', () => {
 
     suiteSetup(async () => {
         TestHelper.before();
-        // Activate the extension before running tests
-        await vscode.extensions.getExtension('soft-assist')?.activate();
+        // Wait for extension to fully activate
+        const extension = vscode.extensions.getExtension('undefined_publisher.soft-assist');
+        console.log('Extension found:', extension?.id);
+        console.log('Extension active:', extension?.isActive);
+        
+        if (!extension) {
+            throw new Error('Extension not found');
+        }
+        
+        if (!extension.isActive) {
+            console.log('Activating extension...');
+            await extension.activate();
+            console.log('Extension activated');
+            // Give a small delay after activation
+            await new Promise(resolve => setTimeout(resolve, 500));
+        }
     });
 
     setup(() => {
@@ -28,9 +42,24 @@ suite('Command Test Suite', () => {
     });
 
     test('Command Registration', async () => {
+        // Get initial commands
         const commands = await vscode.commands.getCommands();
-        assert.ok(commands.includes('soft-assist.openAIPanel'), 'openAIPanel command should be registered');
-        assert.ok(commands.includes('soft-assist.askQuestion'), 'askQuestion command should be registered');
+        
+        // Debug: Log all commands that contain 'soft-assist' or 'ai'
+        const relevantCommands = commands.filter(cmd => 
+            cmd.includes('soft-assist') || cmd.includes('ai')
+        );
+        console.log('Available commands:', relevantCommands);
+        
+        // Direct assertion without waiting
+        assert.ok(
+            commands.includes('soft-assist.openAIPanel'), 
+            `openAIPanel command should be registered. Available commands: ${relevantCommands.join(', ')}`
+        );
+        assert.ok(
+            commands.includes('soft-assist.askQuestion'), 
+            `askQuestion command should be registered. Available commands: ${relevantCommands.join(', ')}`
+        );
     });
 
     test('Open AI Panel Command', async () => {

@@ -16,13 +16,18 @@ export class TestHelper {
         return this.sandbox.stub(obj, method);
     }
 
-    static async waitForCondition(condition: () => boolean, timeout = 2000): Promise<void> {
+    static async waitForCondition(
+        condition: () => boolean | Promise<boolean>,
+        timeout = 2000
+    ): Promise<void> {
         const start = Date.now();
-        while (!condition()) {
-            if (Date.now() - start > timeout) {
-                throw new Error('Timeout waiting for condition');
+        while (Date.now() - start < timeout) {
+            const result = await Promise.resolve(condition());
+            if (result) {
+                return;
             }
             await new Promise(resolve => setTimeout(resolve, 100));
         }
+        throw new Error('Timeout waiting for condition');
     }
 } 

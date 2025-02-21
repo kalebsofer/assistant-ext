@@ -89,7 +89,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ### 0.0.1
 
-Initial release of KSCode AI Assistant:
+Initial release of Assistant:
 - Basic chat interface
 - File context support
 - Split view integration
@@ -99,5 +99,4 @@ Initial release of KSCode AI Assistant:
 
 ## Acknowledgments
 
-- Built with [Ollama](https://ollama.ai/)
-- Uses the DeepSeek model
+- Built with [Ollama](https://ollama.ai/) and [DeepSeek](https://deepseek.com/)
