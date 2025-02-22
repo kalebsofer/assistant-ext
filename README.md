@@ -12,14 +12,6 @@ A VS Code extension that provides an AI-powered coding assistant using Ollama's 
   - View attached files in the UI
   - Remove individual files or clear all context
 
-## TODO
-
-- [X] UX guidelines
-- [X] Integration tests 
-- [ ] Finish unit tests
-- [ ] Publish
-- [ ] CI
-
 ## Requirements
 
 - VS Code version 1.97.0 or higher
