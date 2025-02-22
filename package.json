@@ -4,6 +4,7 @@
   "description": "AI-powered code assistant using Ollama",
   "publisher": "SoftmaxCo",
   "version": "0.0.1",
+  "icon": "public/icon.png",
   "engines": {
     "vscode": "^1.97.0"
   },
