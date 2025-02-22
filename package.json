@@ -2,6 +2,7 @@
   "name": "soft-assist",
   "displayName": "Soft Assistant",
   "description": "AI-powered code assistant using Ollama",
+  "publisher": "SoftmaxCo",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.97.0"
@@ -76,7 +77,9 @@
   "dependencies": {
     "node-fetch": "^3.3.0"
   },
-  "files": [
-    "out/**/*"
-  ]
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kalebsofer/soft-assist.git"
+  },
+  "license": "MIT"
 }
