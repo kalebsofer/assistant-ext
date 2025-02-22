@@ -1,6 +1,6 @@
 # IDE Assistant with Ollama
 
-A VS Code extension that provides an AI-powered coding assistant using Ollama's DeepSeek model. This extension integrates directly into your VS Code environment, offering contextual code assistance, explanations, and suggestions.
+A VS Code extension that provides an AI-powered coding assistant, using a locally hosted language model via Ollama. This extension integrates directly into your VS Code environment, offering contextual code assistance, explanations, and suggestions.
 
 ## Features
 
@@ -15,7 +15,6 @@ A VS Code extension that provides an AI-powered coding assistant using Ollama's 
 ## Requirements
 
 - VS Code version 1.97.0 or higher
-- Node.js (for extension development)
 - [Ollama](https://ollama.ai/) installed and running locally
 - DeepSeek model pulled in Ollama (`ollama pull deepseek-r1:1.5b`)
 
@@ -24,6 +23,7 @@ A VS Code extension that provides an AI-powered coding assistant using Ollama's 
 1. Install Ollama from [ollama.ai](https://ollama.ai)
 2. Pull the DeepSeek model:
    ```bash
+   # Depending on your hardware:
    ollama pull deepseek-r1:1.5b
    ```
 3. Install the extension from VS Code Marketplace (or load from source)
@@ -74,7 +74,7 @@ This extension contributes the following settings:
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## License
+## **License**
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
@@ -88,8 +88,11 @@ Initial release of Assistant:
 - Split view integration
 - DeepSeek model integration
 
----
 
 ## Acknowledgments
 
 - Built with [Ollama](https://ollama.ai/) and [DeepSeek](https://deepseek.com/)
+
+
+### Tips
+<a href="https://www.buymeacoffee.com/kalebsofer" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
