@@ -1,6 +1,6 @@
 # IDE Assistant with Ollama
 
-A VS Code extension that provides an AI-powered coding assistant, using a locally hosted language model via Ollama. This extension integrates directly into your VS Code environment, offering contextual code assistance, explanations, and suggestions.
+An IDE extension that provides an AI-powered coding assistant, using a locally hosted language model via Ollama. This extension integrates directly into your VS Code environment, offering contextual code assistance, explanations, and suggestions.
 
 ## Features
 
